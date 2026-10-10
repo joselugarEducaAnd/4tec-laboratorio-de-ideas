@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matriz de decisión ponderada</title>
+<style>
+:root{--t:#9c4419;--to:#6e2f10;--tinte:#f8ede6;--tx:#25243f;--az:#1b4d7e;--rj:#a32929;--vd:#1e7a3c}
+*{box-sizing:border-box}
+body{margin:0;padding:18px;font:16px/1.45 Verdana,"DejaVu Sans",Arial,sans-serif;color:var(--tx);background:#fbf8f6}
+h1{font-size:20px;color:var(--to);margin:0 0 6px}
+p{margin:4px 0 10px}
+.modos{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+button{font:inherit;padding:6px 12px;border:2px solid var(--t);background:#fff;color:var(--to);border-radius:20px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--t);color:#fff}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--az);outline-offset:2px}
+.tabla{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+th,td{border:1px solid #d8c3b5;padding:6px;text-align:center;vertical-align:middle}
+th{background:var(--tinte)}
+th.crit,td.crit{text-align:left}
+td.crit{min-width:9em}
+select{font:inherit;padding:2px 4px}
+input.nom{font:inherit;width:100%;min-width:6em;padding:3px 5px;border:1px solid #c9b2a3;border-radius:4px;background:#fff}
+.prod{display:block;font-size:12px;color:#5b5b6b;white-space:nowrap}
+tr.total td{font-weight:bold;font-size:17px}
+td.gana,th.gana{background:#e5f3ea}
+td.fuera,th.fuera{background:#f1f1f1;color:#8a8a8a}
+.req td{font-size:13px}
+#res{display:block;padding:12px 14px;background:#fff;border:2px solid var(--t);border-radius:10px;margin-top:12px;min-height:3em}
+#res b{color:var(--to)}
+#res .aviso{color:var(--rj);font-weight:bold}
+.nota{font-size:14px;color:#4a4a5a}
+@media (max-width:520px){body{padding:10px;font-size:15px}table{font-size:13px}td.crit{min-width:6.5em}th,td{padding:4px}.prod{font-size:11px}}
+</style>
+</head>
+<body>
+<h1>Matriz de decisión ponderada</h1>
+<p>Cambia los pesos (1–3) y las puntuaciones (1–5): cada puntuación se multiplica por el peso de su criterio y gana la suma más alta. Solo se comparan las opciones que cumplen los requisitos imprescindibles.</p>
+<div class="modos" role="group" aria-label="Matriz">
+  <button type="button" data-p="bicis">Bicis del patio</button>
+  <button type="button" data-p="gancho">Gancho de mochila</button>
+  <button type="button" data-p="propia">La vuestra</button>
+</div>
+<div class="tabla"><table id="t" aria-describedby="res"></table></div>
+<output id="res" role="status" aria-live="polite"></output>
+<p class="nota" id="pie"></p>
+
+<script>
+const PRESETS={
+ bicis:{crit:['Resuelve el problema','Fácil de fabricar','Barata','Sostenible'],pesos:[3,2,2,1],
+   ops:['Soporte en U anclado','Marquesina con techo','Cartel «prohibido atar»'],
+   p:[[4,5,1],[4,2,5],[4,1,5],[4,3,3]],req:['si','si','si'],
+   pie:'Ejemplo de la unidad: la matriz no decide por vosotros, os obliga a explicar por qué.'},
+ gancho:{crit:['Resistencia','Fabricable en clase','Coste','Sostenibilidad','Accesibilidad'],pesos:[3,2,1,2,1],
+   ops:['PLA','Contrachapado','Cartón pluma'],
+   p:[[4,5,1],[5,2,5],[4,4,5],[2,3,1],[3,1,1]],req:['estudio','estudio','estudio'],
+   pie:'Requisito imprescindible: aguantar 5 kg. Mientras no se haya probado la combinación de diseño, material, orientación y fabricación, queda «en estudio». La puntuación no demuestra resistencia.'},
+ propia:{crit:['Criterio 1','Criterio 2','Criterio 3','Criterio 4'],pesos:[2,2,2,2],
+   ops:['Idea A','Idea B','Idea C'],p:[[3,3,3],[3,3,3],[3,3,3],[3,3,3]],req:['si','si','si'],
+   pie:'Escribid vuestros criterios e ideas. Si el resultado sorprende al equipo, revisad los pesos y explicad el cambio.'}
+};
+let D, base=null, preset='bicis';
+const $=id=>document.getElementById(id);
+const clon=o=>JSON.parse(JSON.stringify(o));
+function totales(){return D.ops.map((_,j)=>D.crit.reduce((s,_,i)=>s+D.p[i][j]*D.pesos[i],0));}
+function ganadoras(tot){const adm=D.ops.map((_,j)=>j).filter(j=>D.req[j]==='si'); if(!adm.length) return {adm,g:[]};
+  const m=Math.max(...adm.map(j=>tot[j])); return {adm,g:adm.filter(j=>tot[j]===m)};}
+function sel(v,max,attrs){let s=`<select ${attrs}>`;for(let k=1;k<=max;k++) s+=`<option${k===v?' selected':''}>${k}</option>`;return s+'</select>';}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+function dibuja(){
+  const tot=totales(), {adm,g}=ganadoras(tot), ed=preset==='propia';
+  const cls=j=>D.req[j]!=='si'?'fuera':(g.includes(j)?'gana':'');
+  let h='<thead><tr><th class="crit" scope="col">Criterio</th><th scope="col">Peso</th>';
+  D.ops.forEach((o,j)=>{h+=`<th scope="col" class="${cls(j)}">${ed?`<input class="nom" data-op="${j}" value="${esc(o)}" aria-label="Nombre de la opción ${j+1}">`:esc(o)}</th>`;});
+  h+='</tr></thead><tbody>';
+  D.crit.forEach((c,i)=>{
+    h+=`<tr><td class="crit">${ed?`<input class="nom" data-cr="${i}" value="${esc(c)}" aria-label="Criterio ${i+1}">`:esc(c)}</td>`;
+    h+=`<td>${sel(D.pesos[i],3,`data-w="${i}" aria-label="Peso de ${esc(c)}"`)}</td>`;
+    D.ops.forEach((o,j)=>{h+=`<td class="${cls(j)}">${sel(D.p[i][j],5,`data-i="${i}" data-j="${j}" aria-label="${esc(o)}: ${esc(c)}"`)}<span class="prod">${D.p[i][j]} × ${D.pesos[i]} = ${D.p[i][j]*D.pesos[i]}</span></td>`;});
+    h+='</tr>';});
+  h+=`<tr class="total"><td class="crit">Total</td><td></td>`+D.ops.map((_,j)=>`<td class="${cls(j)}">${tot[j]}</td>`).join('')+'</tr>';
+  h+=`<tr class="req"><td class="crit">¿Cumple los imprescindibles?</td><td></td>`+D.ops.map((o,j)=>`<td class="${cls(j)}"><select data-r="${j}" aria-label="Imprescindibles: ${esc(o)}"><option value="si"${D.req[j]==='si'?' selected':''}>Sí, demostrado</option><option value="estudio"${D.req[j]==='estudio'?' selected':''}>En estudio</option><option value="no"${D.req[j]==='no'?' selected':''}>No</option></select></td>`).join('')+'</tr></tbody>';
+  $('t').innerHTML=h;
+  // texto
+  let r;
+  if(!adm.length) r=`<span class="aviso">Ninguna opción ha demostrado los requisitos imprescindibles.</span> Los totales (${D.ops.map((o,j)=>esc(o)+' '+tot[j]).join(', ')}) solo son un ejemplo de cálculo: no hay ganadora hasta comprobarlos.`;
+  else{
+    const ns=g.map(j=>esc(D.ops[j])); const nom=ns.length>1?ns.slice(0,-1).join(', ')+' y '+ns[ns.length-1]:ns[0];
+    r= g.length>1?`<b>Empate</b> entre ${nom} (${tot[g[0]]} puntos): hace falta otro criterio o revisar las puntuaciones.`:`Gana <b>${nom}</b> con ${tot[g[0]]} puntos.`;
+    const fuera=D.ops.map((_,j)=>j).filter(j=>D.req[j]!=='si');
+    if(fuera.length) r+=` No se compara${fuera.length>1?'n':''}: ${fuera.map(j=>esc(D.ops[j])+' ('+(D.req[j]==='no'?'no cumple':'en estudio')+', '+tot[j]+' puntos)').join(', ')}.`;
+    if(base!==null && g.length===1 && base!==g[0] && D.req[base]==='si') r+=` Antes ganaba ${esc(D.ops[base])}: explicad qué ha cambiado y por qué.`;
+  }
+  $('res').innerHTML=r; $('pie').textContent=PRESETS[preset].pie;
+}
+function cargar(p){preset=p; D=clon(PRESETS[p]);
+  document.querySelectorAll('button[data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===p));
+  const {g}=ganadoras(totales()); base=g.length===1?g[0]:null; dibuja();}
+$('t').addEventListener('change',e=>{const s=e.target,d=s.dataset;
+  if(d.w!==undefined) D.pesos[+d.w]=+s.value; else if(d.i!==undefined) D.p[+d.i][+d.j]=+s.value; else if(d.r!==undefined) D.req[+d.r]=s.value; else return;
+  dibuja();});
+$('t').addEventListener('input',e=>{const s=e.target,d=s.dataset; if(d.op!==undefined) D.ops[+d.op]=s.value; else if(d.cr!==undefined) D.crit[+d.cr]=s.value; else return;
+  });
+$('t').addEventListener('focusout',e=>{if(e.target.classList.contains('nom')) dibuja();});
+document.querySelectorAll('button[data-p]').forEach(b=>b.onclick=()=>cargar(b.dataset.p));
+const inicial=(window.name&&PRESETS[window.name]&&window.name!=='propia')?window.name:'bicis';
+document.querySelectorAll('button[data-p]').forEach(b=>{if(b.dataset.p!==inicial&&b.dataset.p!=='propia') b.hidden=true;});
+cargar(inicial);
+</script>
+</body>
+</html>
