@@ -99,16 +99,25 @@ function dibuja(){
 }
 // Ajusta la altura del marco al contenido (mismo origen); si no se puede, queda la del atributo.
 function ajusta(){try{const f=window.frameElement;if(!f)return;const h=Math.ceil(document.body.getBoundingClientRect().height);if(h<120)return;f.style.height=(h+6)+'px';}catch(e){}}
-window.addEventListener('resize',()=>{if(D)dibuja();});
+// Redibuja sin perder el foco: vuelve a enfocar el control equivalente de la tabla nueva.
+function redibuja(t){
+  const k=(t&&t.dataset&&$('t').contains(t))?Object.entries(t.dataset).map(([a,v])=>`[data-${a}="${v}"]`).join(''):'';
+  dibuja(); if(!k) return;
+  const n=$('t').querySelector(k); if(!n) return;
+  n.focus({preventScroll:true});
+  if(n.tagName==='INPUT'){const l=n.value.length; try{n.setSelectionRange(l,l);}catch(e){}}
+}
+let anchoPrevio=window.innerWidth;
+window.addEventListener('resize',()=>{if(!D||window.innerWidth===anchoPrevio) return; anchoPrevio=window.innerWidth; redibuja(document.activeElement);});
 function cargar(p){preset=p; D=clon(PRESETS[p]);
   document.querySelectorAll('button[data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===p));
   const {g}=ganadoras(totales()); base=g.length===1?g[0]:null; dibuja();}
 $('t').addEventListener('change',e=>{const s=e.target,d=s.dataset;
   if(d.w!==undefined) D.pesos[+d.w]=+s.value; else if(d.i!==undefined) D.p[+d.i][+d.j]=+s.value; else if(d.r!==undefined) D.req[+d.r]=s.value; else return;
-  dibuja();});
+  redibuja(s);});
 $('t').addEventListener('input',e=>{const s=e.target,d=s.dataset; if(d.op!==undefined) D.ops[+d.op]=s.value; else if(d.cr!==undefined) D.crit[+d.cr]=s.value; else return;
   });
-$('t').addEventListener('focusout',e=>{if(e.target.classList.contains('nom')) dibuja();});
+$('t').addEventListener('focusout',e=>{if(e.target.classList.contains('nom')) redibuja(e.relatedTarget);});
 document.querySelectorAll('button[data-p]').forEach(b=>b.onclick=()=>cargar(b.dataset.p));
 const inicial=(window.name&&PRESETS[window.name]&&window.name!=='propia')?window.name:'bicis';
 document.querySelectorAll('button[data-p]').forEach(b=>{if(b.dataset.p!==inicial&&b.dataset.p!=='propia') b.hidden=true;});
