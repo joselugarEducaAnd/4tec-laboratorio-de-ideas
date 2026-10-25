@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="t d">
+<title id="t">Boceto del soporte en U para bicis</title>
+<desc id="d">Perspectiva con dos soportes en fila y una bici como referencia de tamaño; vista de frente acotada en centímetros con anotaciones.</desc>
+<style>
+text{font-family:Verdana,'DejaVu Sans',Arial,sans-serif;fill:#25243f}
+.tit{font-size:19px;font-weight:700;fill:#073f5f}
+.nota{font-size:15px;fill:#4a3426}
+.cota{font-size:17px;font-weight:700;fill:#0b5c8a}
+.peq{font-size:14px;fill:#55606b}
+.tubo-o{fill:none;stroke:#333;stroke-width:13;stroke-linecap:round}
+.tubo-i{fill:none;stroke:#eef2f5;stroke-width:7.5;stroke-linecap:round}
+.tubo2-o{fill:none;stroke:#8c979f;stroke-width:12;stroke-linecap:round}
+.tubo2-i{fill:none;stroke:#f5f7f9;stroke-width:7;stroke-linecap:round}
+.suelo{stroke:#333;stroke-width:2.5}
+.rayas{stroke:#777;stroke-width:1.5}
+.bici{fill:none;stroke:#6f93b2;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.dim{stroke:#0b5c8a;stroke-width:2;fill:none;marker-start:url(#ma);marker-end:url(#mb)}
+.ext{stroke:#0b5c8a;stroke-width:1.2;stroke-dasharray:5 4}
+.flecha{stroke:#4a3426;stroke-width:1.8;fill:none;marker-end:url(#mf)}
+.placa{fill:#cfd8de;stroke:#333;stroke-width:2}
+</style>
+<defs>
+<marker id="mb" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5c8a"/></marker>
+<marker id="ma" markerWidth="12" markerHeight="12" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M10,0 L0,5 L10,10 z" fill="#0b5c8a"/></marker>
+<marker id="mf" markerWidth="11" markerHeight="11" refX="9" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="#4a3426"/></marker>
+</defs>
+<rect x="0" y="0" width="1000" height="560" fill="#fffdf7"/>
+<line x1="500" y1="40" x2="500" y2="540" stroke="#d9d2c3" stroke-width="2" stroke-dasharray="6 6"/>
+
+<!-- ============ PERSPECTIVA ============ -->
+<text class="tit" x="30" y="44">Perspectiva</text>
+<!-- suelo -->
+<line class="suelo" x1="20" y1="470" x2="440" y2="470"/>
+<path class="rayas" d="M40 470 l-12 14 M80 470 l-12 14 M120 470 l-12 14 M160 470 l-12 14 M200 470 l-12 14 M240 470 l-12 14 M280 470 l-12 14 M320 470 l-12 14 M360 470 l-12 14 M400 470 l-12 14 M440 470 l-12 14"/>
+<!-- segundo soporte, detrás (80 cm de separación) -->
+<path class="placa" d="M225 413 h30 l10 -10 h-30 z" opacity=".7"/>
+<path class="placa" d="M355 413 h30 l10 -10 h-30 z" opacity=".7"/>
+<path class="tubo2-o" d="M245 413 V323 A65 65 0 0 1 375 323 V413"/>
+<path class="tubo2-i" d="M245 413 V323 A65 65 0 0 1 375 323 V413"/>
+<!-- bici de referencia, apoyada en el soporte delantero -->
+<g class="bici">
+  <circle cx="92" cy="404" r="62"/>
+  <circle cx="300" cy="404" r="62"/>
+  <path d="M92 404 L178 410 L162 318 Z"/>
+  <path d="M178 410 L282 330 L162 318"/>
+  <path d="M300 404 L284 322 L280 300 L300 296"/>
+  <path d="M146 310 h36"/>
+</g>
+<!-- soporte delantero -->
+<path class="placa" d="M110 470 h30 l10 -10 h-30 z"/>
+<path class="placa" d="M240 470 h30 l10 -10 h-30 z"/>
+<path class="tubo-o" d="M125 466 V380 A65 65 0 0 1 255 380 V466"/>
+<path class="tubo-i" d="M125 466 V380 A65 65 0 0 1 255 380 V466"/>
+<!-- separación -->
+<line class="ext" x1="270" y1="470" x2="300" y2="500"/>
+<line class="ext" x1="400" y1="413" x2="430" y2="443"/>
+<line class="dim" x1="294" y1="494" x2="424" y2="437"/>
+<text class="cota" x="368" y="500">80</text>
+<text class="peq" x="300" y="530">separación entre soportes</text>
+<text class="peq" x="24" y="530">bici dibujada como referencia</text>
+<text class="peq" x="24" y="548">de tamaño (≈ 1,7 m de largo)</text>
+<path class="flecha" d="M90 520 C70 500 66 480 72 462"/>
+
+<!-- ============ VISTA DE FRENTE ============ -->
+<text class="tit" x="530" y="44">Vista de frente</text>
+<text class="peq" x="530" y="66">medidas en cm</text>
+<line class="suelo" x1="560" y1="480" x2="960" y2="480"/>
+<path class="rayas" d="M575 480 l-12 14 M615 480 l-12 14 M655 480 l-12 14 M695 480 l-12 14 M735 480 l-12 14 M775 480 l-12 14 M815 480 l-12 14 M855 480 l-12 14 M895 480 l-12 14 M935 480 l-12 14"/>
+<rect class="placa" x="627.5" y="473" width="37.5" height="7"/>
+<rect class="placa" x="790" y="473" width="37.5" height="7"/>
+<path class="tubo-o" d="M646.25 474 V367.5 A81.25 81.25 0 0 1 808.75 367.5 V474" style="stroke-width:15"/>
+<path class="tubo-i" d="M646.25 474 V367.5 A81.25 81.25 0 0 1 808.75 367.5 V474" style="stroke-width:9"/>
+<!-- cota altura 80 -->
+<line class="ext" x1="727.5" y1="280" x2="586" y2="280"/>
+<line class="ext" x1="627" y1="480" x2="586" y2="480"/>
+<line class="dim" x1="596" y1="282" x2="596" y2="478"/>
+<text class="cota" x="0" y="0" transform="translate(588 395) rotate(-90)" text-anchor="middle">80</text>
+<!-- cota anchura 70 -->
+<line class="ext" x1="640" y1="360" x2="640" y2="226"/>
+<line class="ext" x1="815" y1="360" x2="815" y2="226"/>
+<line class="dim" x1="642" y1="236" x2="813" y2="236"/>
+<text class="cota" x="727.5" y="228" text-anchor="middle">70</text>
+<!-- diámetro del tubo -->
+<text class="cota" x="858" y="428">Ø 5</text>
+<path class="flecha" d="M855 422 L820 418" style="stroke:#0b5c8a;marker-end:url(#mb)"/>
+<!-- placa 15 -->
+<line class="ext" x1="627.5" y1="482" x2="627.5" y2="512"/>
+<line class="ext" x1="665" y1="482" x2="665" y2="512"/>
+<line class="dim" x1="629" y1="506" x2="663" y2="506"/>
+<text class="cota" x="646" y="530" text-anchor="middle">15</text>
+<!-- anotaciones -->
+<text class="nota" x="842" y="300">tubo de acero</text>
+<text class="nota" x="842" y="319">galvanizado</text>
+<path class="flecha" d="M840 312 L818 350"/>
+<text class="nota" x="830" y="170">curva amplia,</text>
+<text class="nota" x="830" y="189">sin aristas</text>
+<path class="flecha" d="M826 192 C808 215 800 262 796 292"/>
+<text class="nota" x="842" y="514">placa atornillada</text>
+<text class="nota" x="842" y="533">con 4 tacos</text>
+<path class="flecha" d="M840 512 L830 484"/>
+</svg>

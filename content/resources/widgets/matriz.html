@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matriz de decisión ponderada</title>
 <style>
-:root{--t:#9c4419;--to:#6e2f10;--tinte:#f8ede6;--tx:#25243f;--az:#1b4d7e;--rj:#a32929;--vd:#1e7a3c}
+:root{--t:#0b5c8a;--to:#073f5f;--tinte:#e7f0f6;--tx:#25243f;--az:#8a4b2a;--rj:#a32929;--vd:#1e7a3c;--linea:#c2d8e6}
 *{box-sizing:border-box}
-body{margin:0;padding:18px;font:16px/1.45 Verdana,"DejaVu Sans",Arial,sans-serif;color:var(--tx);background:#fbf8f6}
+body{margin:0;padding:18px;font:16px/1.45 Verdana,"DejaVu Sans",Arial,sans-serif;color:var(--tx);background:#f7fafc}
 h1{font-size:20px;color:var(--to);margin:0 0 6px}
 p{margin:4px 0 10px}
 .modos{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
@@ -16,12 +16,12 @@ button[aria-pressed="true"]{background:var(--t);color:#fff}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--az);outline-offset:2px}
 .tabla{overflow-x:auto}
 table{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
-th,td{border:1px solid #d8c3b5;padding:6px;text-align:center;vertical-align:middle}
+th,td{border:1px solid var(--linea);padding:6px;text-align:center;vertical-align:middle}
 th{background:var(--tinte)}
 th.crit,td.crit{text-align:left}
 td.crit{min-width:9em}
 select{font:inherit;padding:2px 4px}
-input.nom{font:inherit;width:100%;min-width:6em;padding:3px 5px;border:1px solid #c9b2a3;border-radius:4px;background:#fff}
+input.nom{font:inherit;width:100%;min-width:4.5em;padding:3px 5px;border:1px solid #9fb8c9;border-radius:4px;background:#fff}
 .prod{display:block;font-size:12px;color:#5b5b6b;white-space:nowrap}
 tr.total td{font-weight:bold;font-size:17px}
 td.gana,th.gana{background:#e5f3ea}
@@ -31,7 +31,8 @@ td.fuera,th.fuera{background:#f1f1f1;color:#8a8a8a}
 #res b{color:var(--to)}
 #res .aviso{color:var(--rj);font-weight:bold}
 .nota{font-size:14px;color:#4a4a5a}
-@media (max-width:520px){body{padding:10px;font-size:15px}table{font-size:13px}td.crit{min-width:6.5em}th,td{padding:4px}.prod{font-size:11px}}
+@media (max-width:520px){body{padding:8px;font-size:14px}h1{font-size:17px}table{font-size:12px}td.crit{min-width:4.6em;overflow-wrap:anywhere}th,td{padding:3px 2px}.prod{font-size:10px;white-space:normal}select{font-size:12px;padding:1px 0;max-width:100%}input.nom{min-width:0;font-size:12px;padding:2px}.req select{font-size:11px}}
+@media (max-width:380px){.prod{display:none}td.crit{min-width:3.6em}th{font-size:11px}th,td.crit{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}body{padding:6px}.req select{width:100%;min-width:0;padding:0}td select{min-width:0}td.crit{font-size:11.5px}}
 </style>
 </head>
 <body>
@@ -58,7 +59,7 @@ const PRESETS={
    pie:'Requisito imprescindible: aguantar 5 kg. Mientras no se haya probado la combinación de diseño, material, orientación y fabricación, queda «en estudio». La puntuación no demuestra resistencia.'},
  propia:{crit:['Criterio 1','Criterio 2','Criterio 3','Criterio 4'],pesos:[2,2,2,2],
    ops:['Idea A','Idea B','Idea C'],p:[[3,3,3],[3,3,3],[3,3,3],[3,3,3]],req:['si','si','si'],
-   pie:'Escribid vuestros criterios e ideas. Si el resultado sorprende al equipo, revisad los pesos y explicad el cambio.'}
+   pie:'Escribid vuestros criterios e ideas. Fijad los pesos antes de puntuar y escribid por qué. Si el resultado sorprende, buscad qué criterio falta o qué puntuación no está justificada; si cambiáis un peso, anotad en la bitácora el antes, el después y la razón.'}
 };
 let D, base=null, preset='bicis';
 const $=id=>document.getElementById(id);
@@ -70,6 +71,7 @@ function sel(v,max,attrs){let s=`<select ${attrs}>`;for(let k=1;k<=max;k++) s+=`
 function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
 function dibuja(){
   const tot=totales(), {adm,g}=ganadoras(tot), ed=preset==='propia';
+  const corto=window.innerWidth<420, L=corto?['Sí','Estudio','No']:['Sí, cumple','En estudio','No'];
   const cls=j=>D.req[j]!=='si'?'fuera':(g.includes(j)?'gana':'');
   let h='<thead><tr><th class="crit" scope="col">Criterio</th><th scope="col">Peso</th>';
   D.ops.forEach((o,j)=>{h+=`<th scope="col" class="${cls(j)}">${ed?`<input class="nom" data-op="${j}" value="${esc(o)}" aria-label="Nombre de la opción ${j+1}">`:esc(o)}</th>`;});
@@ -80,11 +82,11 @@ function dibuja(){
     D.ops.forEach((o,j)=>{h+=`<td class="${cls(j)}">${sel(D.p[i][j],5,`data-i="${i}" data-j="${j}" aria-label="${esc(o)}: ${esc(c)}"`)}<span class="prod">${D.p[i][j]} × ${D.pesos[i]} = ${D.p[i][j]*D.pesos[i]}</span></td>`;});
     h+='</tr>';});
   h+=`<tr class="total"><td class="crit">Total</td><td></td>`+D.ops.map((_,j)=>`<td class="${cls(j)}">${tot[j]}</td>`).join('')+'</tr>';
-  h+=`<tr class="req"><td class="crit">¿Cumple los imprescindibles?</td><td></td>`+D.ops.map((o,j)=>`<td class="${cls(j)}"><select data-r="${j}" aria-label="Imprescindibles: ${esc(o)}"><option value="si"${D.req[j]==='si'?' selected':''}>Sí, demostrado</option><option value="estudio"${D.req[j]==='estudio'?' selected':''}>En estudio</option><option value="no"${D.req[j]==='no'?' selected':''}>No</option></select></td>`).join('')+'</tr></tbody>';
+  h+=`<tr class="req"><td class="crit">¿Cumple los imprescindibles?</td><td></td>`+D.ops.map((o,j)=>`<td class="${cls(j)}"><select data-r="${j}" aria-label="Imprescindibles: ${esc(o)}"><option value="si"${D.req[j]==='si'?' selected':''}>${L[0]}</option><option value="estudio"${D.req[j]==='estudio'?' selected':''}>${L[1]}</option><option value="no"${D.req[j]==='no'?' selected':''}>${L[2]}</option></select></td>`).join('')+'</tr></tbody>';
   $('t').innerHTML=h;
   // texto
   let r;
-  if(!adm.length) r=`<span class="aviso">Ninguna opción ha demostrado los requisitos imprescindibles.</span> Los totales (${D.ops.map((o,j)=>esc(o)+' '+tot[j]).join(', ')}) solo son un ejemplo de cálculo: no hay ganadora hasta comprobarlos.`;
+  if(!adm.length) r=`<span class="aviso">Ninguna opción cumple todavía los requisitos imprescindibles.</span> Los totales (${D.ops.map((o,j)=>esc(o)+' '+tot[j]).join(', ')}) solo son un ejemplo de cálculo: no hay ganadora hasta comprobarlos.`;
   else{
     const ns=g.map(j=>esc(D.ops[j])); const nom=ns.length>1?ns.slice(0,-1).join(', ')+' y '+ns[ns.length-1]:ns[0];
     r= g.length>1?`<b>Empate</b> entre ${nom} (${tot[g[0]]} puntos): hace falta otro criterio o revisar las puntuaciones.`:`Gana <b>${nom}</b> con ${tot[g[0]]} puntos.`;
@@ -93,7 +95,11 @@ function dibuja(){
     if(base!==null && g.length===1 && base!==g[0] && D.req[base]==='si') r+=` Antes ganaba ${esc(D.ops[base])}: explicad qué ha cambiado y por qué.`;
   }
   $('res').innerHTML=r; $('pie').textContent=PRESETS[preset].pie;
+  ajusta();
 }
+// Ajusta la altura del marco al contenido (mismo origen); si no se puede, queda la del atributo.
+function ajusta(){try{const f=window.frameElement;if(!f)return;const h=Math.ceil(document.body.getBoundingClientRect().height);if(h<120)return;f.style.height=(h+6)+'px';}catch(e){}}
+window.addEventListener('resize',()=>{if(D)dibuja();});
 function cargar(p){preset=p; D=clon(PRESETS[p]);
   document.querySelectorAll('button[data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===p));
   const {g}=ganadoras(totales()); base=g.length===1?g[0]:null; dibuja();}

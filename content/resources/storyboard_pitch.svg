@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" role="img" aria-labelledby="t d">
+<title id="t">Storyboard del pitch del aparcabicis</title>
+<desc id="d">Cinco viñetas, una por tramo del pitch, con lo que se enseña y lo que se dice.</desc>
+<style>
+text{font-family:Verdana,'DejaVu Sans',Arial,sans-serif;fill:#25243f}
+.cab{font-size:15px;font-weight:700;fill:#ffffff}
+.seg{font-size:13px;fill:#ffffff}
+.dice{font-size:12.5px;fill:#25243f}
+.dt{font-size:12.5px;font-weight:700;fill:#073f5f}
+.big{font-size:17px;font-weight:700;fill:#073f5f}
+.peq{font-size:12.5px;fill:#3e4650}
+.marco{fill:#ffffff;stroke:#0b5c8a;stroke-width:2.5}
+.band{fill:#0b5c8a}
+.linea{stroke:#333;stroke-width:2.5;fill:none;stroke-linecap:round}
+.bici{fill:none;stroke:#6f93b2;stroke-width:2.5}
+.u{fill:none;stroke:#333;stroke-width:5;stroke-linecap:round}
+</style>
+<rect width="1000" height="440" fill="#ffffff"/>
+<text x="500" y="26" text-anchor="middle" style="font-size:17px;font-weight:700;fill:#073f5f">Storyboard: el pitch del aparcabicis en cinco viñetas (3 minutos)</text>
+
+<!-- 1 -->
+<g transform="translate(10 44)">
+<rect class="marco" width="186" height="236" rx="8"/><path class="band" d="M0 8 a8 8 0 0 1 8 -8 h170 a8 8 0 0 1 8 8 v24 h-186 z"/>
+<text class="cab" x="10" y="22">1 · Problema</text><text class="seg" x="176" y="22" text-anchor="end">30 s</text>
+<path class="linea" d="M20 180 H166 M20 110 H166 M30 110 V180 M60 110 V180 M90 110 V180 M120 110 V180 M150 110 V180"/>
+<circle class="bici" cx="45" cy="166" r="14"/><circle class="bici" cx="80" cy="166" r="14"/>
+<circle class="bici" cx="105" cy="166" r="14"/><circle class="bici" cx="140" cy="166" r="14"/>
+<text class="big" x="93" y="215" text-anchor="middle">9 bicis</text>
+<text class="peq" x="93" y="232" text-anchor="middle">cada mañana</text>
+<text class="peq" x="93" y="70" text-anchor="middle">Se enseña: foto</text>
+<text class="peq" x="93" y="86" text-anchor="middle">de la valla</text>
+</g>
+<text class="dt" x="14" y="304">Se dice:</text>
+<text class="dice" x="14" y="322">«Cada mañana, nueve bicis</text>
+<text class="dice" x="14" y="338">atadas a esta valla. Quien</text>
+<text class="dice" x="14" y="354">va en silla de ruedas</text>
+<text class="dice" x="14" y="370">no puede pasar.»</text>
+
+<!-- 2 -->
+<g transform="translate(206 44)">
+<rect class="marco" width="186" height="236" rx="8"/><path class="band" d="M0 8 a8 8 0 0 1 8 -8 h170 a8 8 0 0 1 8 8 v24 h-186 z"/>
+<text class="cab" x="10" y="22">2 · Evidencia</text><text class="seg" x="176" y="22" text-anchor="end">30 s</text>
+<path class="linea" d="M30 70 v40 M42 70 v40 M54 70 v40 M66 70 v40 M24 106 l50 -32 M92 70 v40 M104 70 v40 M116 70 v40 M128 70 v40"/>
+<text class="peq" x="93" y="134" text-anchor="middle">recuento: 3 días</text>
+<path d="M20 150 h146 a8 8 0 0 1 8 8 v40 a8 8 0 0 1 -8 8 h-110 l-14 14 v-14 h-22 a8 8 0 0 1 -8 -8 v-40 a8 8 0 0 1 8 -8 z" fill="#e7f0f6" stroke="#0b5c8a" stroke-width="1.5"/>
+<text class="peq" x="93" y="172" text-anchor="middle">«La ato aquí porque</text>
+<text class="peq" x="93" y="190" text-anchor="middle">no hay sitio»</text>
+</g>
+<text class="dt" x="210" y="304">Se dice:</text>
+<text class="dice" x="210" y="322">«Las contamos tres días.</text>
+<text class="dice" x="210" y="338">Y quien llega en bici nos</text>
+<text class="dice" x="210" y="354">dijo: “la ato aquí porque</text>
+<text class="dice" x="210" y="370">no hay sitio”.»</text>
+
+<!-- 3 -->
+<g transform="translate(402 44)">
+<rect class="marco" width="186" height="236" rx="8"/><path class="band" d="M0 8 a8 8 0 0 1 8 -8 h170 a8 8 0 0 1 8 8 v24 h-186 z"/>
+<text class="cab" x="10" y="22">3 · Propuesta</text><text class="seg" x="176" y="22" text-anchor="end">60 s</text>
+<text class="peq" x="93" y="62" text-anchor="middle">Se enseña: el boceto</text>
+<path class="linea" d="M14 170 H172"/>
+<path class="u" d="M26 168 V150 a12 12 0 0 1 24 0 V168 M62 168 V150 a12 12 0 0 1 24 0 V168 M98 168 V150 a12 12 0 0 1 24 0 V168 M134 168 V150 a12 12 0 0 1 24 0 V168"/>
+<path d="M16 120 H170" stroke="#999" stroke-width="2" stroke-dasharray="6 4"/>
+<text class="peq" x="93" y="112" text-anchor="middle">valla</text>
+<text class="peq" x="93" y="196" text-anchor="middle">módulos de U bajas</text>
+<text class="peq" x="93" y="214" text-anchor="middle">junto a la valla</text>
+</g>
+<text class="dt" x="406" y="304">Se dice:</text>
+<text class="dice" x="406" y="322">«Proponemos módulos de U</text>
+<text class="dice" x="406" y="338">bajas junto a la valla.</text>
+<text class="dice" x="406" y="354">Ganó en nuestra matriz</text>
+<text class="dice" x="406" y="370">porque resuelve el paso</text>
+<text class="dice" x="406" y="386">y es barata.»</text>
+
+<!-- 4 -->
+<g transform="translate(598 44)">
+<rect class="marco" width="186" height="236" rx="8"/><path class="band" d="M0 8 a8 8 0 0 1 8 -8 h170 a8 8 0 0 1 8 8 v24 h-186 z"/>
+<text class="cab" x="10" y="22">4 · Materiales</text><text class="seg" x="176" y="22" text-anchor="end">30 s</text>
+<path class="u" d="M50 172 V132 a30 30 0 0 1 60 0 V172" style="stroke-width:9;stroke:#7d8890"/>
+<rect x="36" y="172" width="88" height="12" fill="#555"/>
+<text class="peq" x="93" y="204" text-anchor="middle">acero galvanizado</text>
+<text class="peq" x="93" y="221" text-anchor="middle">base pesada, sin taladrar</text>
+<text class="peq" x="93" y="56" text-anchor="middle">Se enseña: una</text>
+<text class="peq" x="93" y="72" text-anchor="middle">foto del material</text>
+</g>
+<text class="dt" x="602" y="304">Se dice:</text>
+<text class="dice" x="602" y="322">«Acero galvanizado: dura</text>
+<text class="dice" x="602" y="338">décadas si no se raya y</text>
+<text class="dice" x="602" y="354">se recicla. Las U bajas</text>
+<text class="dice" x="602" y="370">sirven también para</text>
+<text class="dice" x="602" y="386">patinetes.»</text>
+
+<!-- 5 -->
+<g transform="translate(794 44)">
+<rect class="marco" width="186" height="236" rx="8"/><path class="band" d="M0 8 a8 8 0 0 1 8 -8 h170 a8 8 0 0 1 8 8 v24 h-186 z"/>
+<text class="cab" x="10" y="22">5 · Cierre</text><text class="seg" x="176" y="22" text-anchor="end">30 s</text>
+<text class="peq" x="16" y="66">Haría falta:</text>
+<rect x="18" y="78" width="13" height="13" fill="none" stroke="#333" stroke-width="2"/><text class="peq" x="40" y="90">permiso del centro</text>
+<rect x="18" y="102" width="13" height="13" fill="none" stroke="#333" stroke-width="2"/><text class="peq" x="40" y="114">seis módulos</text>
+<rect x="18" y="126" width="13" height="13" fill="none" stroke="#333" stroke-width="2"/><text class="peq" x="40" y="138">un taller que suelde</text>
+<text class="big" x="93" y="186" text-anchor="middle" style="font-size:14.5px">«Que llegar en bici</text>
+<text class="big" x="93" y="206" text-anchor="middle" style="font-size:14.5px">no estorbe a nadie»</text>
+</g>
+<text class="dt" x="798" y="304">Se dice:</text>
+<text class="dice" x="798" y="322">«Necesitamos permiso y</text>
+<text class="dice" x="798" y="338">seis módulos. Queremos</text>
+<text class="dice" x="798" y="354">que llegar en bici no</text>
+<text class="dice" x="798" y="370">estorbe a nadie.»</text>
+<text class="peq" x="500" y="426" text-anchor="middle">Cada persona del equipo cuenta uno o dos tramos; los tiempos suman tres minutos.</text>
+</svg>

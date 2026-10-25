@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" role="img" aria-labelledby="t d">
+<title id="t">Boceto incompleto de una papelera doble</title>
+<desc id="d">Perspectiva y vista de frente de una papelera doble de reciclaje con una sola cota (profundidad 35 cm) y dos anotaciones.</desc>
+<style>
+text{font-family:Verdana,'DejaVu Sans',Arial,sans-serif;fill:#25243f}
+.tit{font-size:19px;font-weight:700;fill:#073f5f}
+.nota{font-size:15px;fill:#4a3426}
+.cota{font-size:17px;font-weight:700;fill:#0b5c8a}
+.trazo{fill:#f3f1ea;stroke:#333;stroke-width:3;stroke-linejoin:round}
+.lado{fill:#e2ded2;stroke:#333;stroke-width:3;stroke-linejoin:round}
+.tapa{fill:#ebe7dc;stroke:#333;stroke-width:3;stroke-linejoin:round}
+.boca{fill:#555;stroke:#333;stroke-width:2}
+.div{stroke:#333;stroke-width:2;stroke-dasharray:7 5}
+.suelo{stroke:#333;stroke-width:2.5}
+.dim{stroke:#0b5c8a;stroke-width:2;fill:none;marker-start:url(#ma);marker-end:url(#mb)}
+.ext{stroke:#0b5c8a;stroke-width:1.2;stroke-dasharray:5 4}
+.flecha{stroke:#4a3426;stroke-width:1.8;fill:none;marker-end:url(#mf)}
+</style>
+<defs>
+<marker id="mb" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5c8a"/></marker>
+<marker id="ma" markerWidth="12" markerHeight="12" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M10,0 L0,5 L10,10 z" fill="#0b5c8a"/></marker>
+<marker id="mf" markerWidth="11" markerHeight="11" refX="9" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="#4a3426"/></marker>
+</defs>
+<rect x="0" y="0" width="820" height="480" fill="#fffdf7"/>
+<line x1="420" y1="30" x2="420" y2="460" stroke="#d9d2c3" stroke-width="2" stroke-dasharray="6 6"/>
+
+<text class="tit" x="30" y="44">Perspectiva</text>
+<line class="suelo" x1="40" y1="430" x2="400" y2="430"/>
+<path class="tapa" d="M90 170 L270 170 L340 125 L160 125 Z"/>
+<path class="lado" d="M270 170 L340 125 L340 385 L270 430 Z"/>
+<rect class="trazo" x="90" y="170" width="180" height="260"/>
+<line class="div" x1="180" y1="232" x2="180" y2="428"/>
+<circle class="boca" cx="135" cy="208" r="20"/>
+<rect class="boca" x="198" y="202" width="56" height="12" rx="3"/>
+<line class="ext" x1="272" y1="432" x2="286" y2="446"/>
+<line class="ext" x1="342" y1="387" x2="356" y2="401"/>
+<line class="dim" x1="282" y1="442" x2="350" y2="398"/>
+<text class="cota" x="334" y="444">35</text>
+
+<text class="tit" x="450" y="44">Vista de frente</text>
+<line class="suelo" x1="450" y1="410" x2="790" y2="410"/>
+<rect class="trazo" x="480" y="150" width="180" height="260"/>
+<line class="div" x1="570" y1="212" x2="570" y2="408"/>
+<circle class="boca" cx="525" cy="188" r="20"/>
+<rect class="boca" x="588" y="182" width="56" height="12" rx="3"/>
+<text class="nota" x="610" y="96">boca redonda:</text>
+<text class="nota" x="610" y="115">envases</text>
+<path class="flecha" d="M606 104 C570 110 545 135 535 165"/>
+<text class="nota" x="680" y="210">rendija:</text>
+<text class="nota" x="680" y="229">papel</text>
+<path class="flecha" d="M676 205 L650 192"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="t d">
+<title id="t">Ciclo comercial de un producto</title>
+<desc id="d">Curva de ventas en el tiempo con cuatro fases: lanzamiento, crecimiento, madurez y declive, y pistas observables de cada una.</desc>
+<style>
+text{font-family:Verdana,'DejaVu Sans',Arial,sans-serif;fill:#25243f}
+.tit{font-size:19px;font-weight:700;fill:#073f5f}
+.fase{font-size:17px;font-weight:700;fill:#0b5c8a}
+.pista{font-size:14px;fill:#3e4650}
+.eje{stroke:#25243f;stroke-width:2.5;fill:none;marker-end:url(#me)}
+.sep{stroke:#9fb8c9;stroke-width:1.5;stroke-dasharray:6 5}
+.curva{fill:none;stroke:#0b5c8a;stroke-width:5;stroke-linecap:round}
+.area{fill:#e7f0f6}
+.lab{font-size:15px;fill:#25243f}
+</style>
+<defs><marker id="me" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill="#25243f"/></marker></defs>
+<rect width="1000" height="500" fill="#ffffff"/>
+<text class="tit" x="500" y="34" text-anchor="middle">Ciclo comercial: las ventas de un tipo de producto a lo largo del tiempo</text>
+<path class="area" d="M90 380 L90 370 C180 368 240 350 270 330 C340 285 400 180 470 145 C540 115 660 112 730 140 C820 180 900 280 960 330 L960 380 Z"/>
+<line class="sep" x1="270" y1="70" x2="270" y2="380"/>
+<line class="sep" x1="470" y1="70" x2="470" y2="380"/>
+<line class="sep" x1="730" y1="70" x2="730" y2="380"/>
+<path class="curva" d="M90 370 C180 368 240 350 270 330 C340 285 400 180 470 145 C540 115 660 112 730 140 C820 180 900 280 960 330"/>
+<path class="eje" d="M90 380 V60"/>
+<path class="eje" d="M90 380 H975"/>
+<text class="lab" x="0" y="0" transform="translate(70 225) rotate(-90)" text-anchor="middle">ventas</text>
+<text class="lab" x="960" y="402" text-anchor="end">tiempo</text>
+<text class="fase" x="180" y="428" text-anchor="middle">Lanzamiento</text>
+<text class="pista" x="180" y="452" text-anchor="middle">pocas marcas,</text>
+<text class="pista" x="180" y="472" text-anchor="middle">precio alto</text>
+<text class="fase" x="370" y="428" text-anchor="middle">Crecimiento</text>
+<text class="pista" x="370" y="452" text-anchor="middle">marcas nuevas,</text>
+<text class="pista" x="370" y="472" text-anchor="middle">precios que bajan</text>
+<text class="fase" x="600" y="428" text-anchor="middle">Madurez</text>
+<text class="pista" x="600" y="452" text-anchor="middle">modelos casi iguales,</text>
+<text class="pista" x="600" y="472" text-anchor="middle">precio estable</text>
+<text class="fase" x="845" y="428" text-anchor="middle">Declive</text>
+<text class="pista" x="845" y="452" text-anchor="middle">ofertas para liquidar,</text>
+<text class="pista" x="845" y="472" text-anchor="middle">llega un sustituto</text>
+</svg>
